@@ -145,6 +145,15 @@ In this simple example, API endpoints or pages are named the same as the permiss
 
 For instance, if a user requests a path, the middleware can check whether the user's stored permissions include access to that path.
 ### Starting the Project
+Firstly some environment variables have to be set. For that a .env needs to be created in the root directory of the project.
+```env
+SESSION_SECRET=ce317ce3-fad7-4529-af02-07631cd09fd1
+SESSION_DURATION=24
+NODE_ENV=development
+```
+Make sure to replace the Session Secret with something of your own.
+The Session Duration is in hours and can be changed as needed.
+
 
 To start the project, run the following commands in the root directory:
 
