@@ -8,65 +8,6 @@ This project demonstrates a simple yet efficient and secure authentication syste
 
 In typical web applications, before a user can read or store data, their information and permissions are verified through database lookups. This process can be time-consuming and costly, especially when such database checks are not immediately relevant to the current user session or use case.
 
-The goal of this project is to reduce the frequency of database queries—ideally to just **one per session** — by leveraging signed certificates for authentication.
-
-### How It Works
-
-Instead of generating a session ID stored both on the client and the server (which requires continuous server-side verification), we issue the client a **signed certificate** that contains all the relevant information about their user session.
-
-As long as the certificate is signed with a secret key, it ensures that only the server can validate or issue it. This makes it practically impossible for third parties to forge a valid certificate.
-
-By using this approach, the system avoids unnecessary database queries for each user action, leading to significant performance improvements.
-
-### Advantages
-
-- **Reduced Database Lookups**: The server only needs to verify user information once per session, instead of repeatedly querying the database on every request.
-- **Improved Performance**: With fewer database queries, overall app performance is enhanced, especially for high-traffic applications.
-- **Stateless Authentication**: The server does not need to store session data, as all necessary user details are embedded in the certificate.
-
-## Potential Drawbacks
-
-While this approach offers clear benefits, it also has some limitations that developers should consider:
-
-1. **Stale Data**: Since the certificate holds a static snapshot of the user’s information, any updates (e.g., permission changes or role updates) will not be reflected until the session is renewed.
-   
-2. **Revoking Permissions**: If you need to revoke permissions or update user data in real-time, relying solely on certificates could be problematic. In such cases, consider validating sensitive data directly with the database on every request to ensure the most up-to-date information is used.
-
-3. **Session Expiration**: You should define a reasonable session expiration time, after which the certificate must be renewed, to balance performance with security.
-
-## Conclusion
-
-This project showcases an authentication system that optimizes performance by reducing database load. By using signed certificates, we achieve a balance between performance and security. However, developers must remain mindful of the limitations, especially regarding stale data, and adjust their implementation accordingly depending on the specific use case.
-
-
-## Deep Dive
-
-### Logging In
-
-To log in, a POST request needs to be sent to the server.
-
-```http
-### The server should respond with Status 200
-POST http://localhost:3000/
-{
-  "user": "michael",
-  "email": "1234" 
-}
-```
-Certainly! Here’s the entire documentation rewritten in Markdown format, starting from the overview to the deep dive sections, ready for GitHub:
-
-markdown
-
-# Next.js Authentication Project
-
-## Overview
-
-This project demonstrates a simple yet efficient and secure authentication system for web applications built with Next.js.
-
-## Key Principle
-
-In typical web applications, before a user can read or store data, their information and permissions are verified through database lookups. This process can be time-consuming and costly, especially when such database checks are not immediately relevant to the current user session or use case.
-
 The goal of this project is to reduce the frequency of database queries—ideally to just **one per session**—by leveraging signed certificates for authentication.
 
 ### How It Works
